@@ -31,10 +31,11 @@ class GoogleChart extends HTMLElement {
             });
         });
     }
-    async drawChart({type,title,width,height,hAxis,vAxis,cols,rows,data}) {
+    async drawChart({type,title,legend,width,height,hAxis,vAxis,cols,rows,data}) {
         // set defaults
         type ||= this.getAttribute('type');
         title ||= this.getAttribute('title');
+        legend ||= this.getAttribute('legend') || "none";
         rows ||= data;
         const rect = this.getBoundingClientRect();
         width ||= rect.width;
@@ -55,6 +56,7 @@ class GoogleChart extends HTMLElement {
         // Set chart options
         const options = {
             title,
+            legend: typeof legend === "string" ? {position: legend} : legend,
             width,
             height,
             hAxis,
