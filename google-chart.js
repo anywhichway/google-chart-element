@@ -31,7 +31,7 @@ class GoogleChart extends HTMLElement {
             });
         });
     }
-    async drawChart({type,title,legend,width,height,hAxis,vAxis,cols,rows,data}) {
+    async drawChart({type,title,legend,annotations,width,height,hAxis,vAxis,cols,rows,data}) {
         // set defaults
         type ||= this.getAttribute('type');
         title ||= this.getAttribute('title');
@@ -62,6 +62,7 @@ class GoogleChart extends HTMLElement {
             hAxis,
             vAxis
         };
+        if(annotations) options.annotations = annotations;
         // Instantiate and draw our chart, passing in some options.
         const chart = new google.visualization[type](this.shadowRoot.getElementById('chart'));
         chart.draw(table, options);
